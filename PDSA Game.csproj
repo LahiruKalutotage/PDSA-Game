@@ -46,6 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Games\Game01.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Games\Game01.Designer.cs">
+      <DependentUpon>Game01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Game02.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Games\Game02.Designer.cs">
+      <DependentUpon>Game02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Game03.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Games\Game03.Designer.cs">
+      <DependentUpon>Game03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Game04.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Games\Game04.Designer.cs">
+      <DependentUpon>Game04.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Game05.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Games\Game05.Designer.cs">
+      <DependentUpon>Game05.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,8 +109,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Games\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
