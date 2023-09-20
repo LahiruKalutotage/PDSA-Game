@@ -16,5 +16,35 @@ namespace PDSA_Game
         {
             InitializeComponent();
         }
+
+        private void btnGame1_Click(object sender, EventArgs e)
+        {
+           Games.Game01 _obj = new Games.Game01();
+            _obj.Show();
+        }
+
+        private void btnGame2_Click(object sender, EventArgs e)
+        {
+            Games.Game02 _obj = new Games.Game02();
+            _obj.Show();
+        }
+
+        private void btnGame3_Click(object sender, EventArgs e)
+        {
+            Games.Game03 _obj = new Games.Game03();
+            _obj.Show();
+        }
+
+        private void btnGame4_Click(object sender, EventArgs e)
+        {
+            Games.Game04 _obj = new Games.Game04();
+            _obj.Show();
+        }
+
+        private void btnGame5_Click(object sender, EventArgs e)
+        {
+            Games.Game05 _obj = new Games.Game05();
+            _obj.Show();
+        }
     }
 }
