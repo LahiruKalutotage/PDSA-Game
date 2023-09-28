@@ -75,6 +75,7 @@ namespace PDSA_Game.Games
             if (isEmpty)
             {
                 return;
+
             }
            
             bool isSame = string.Equals(input, longestCommonSeq, StringComparison.OrdinalIgnoreCase);
