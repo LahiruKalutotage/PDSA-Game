@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tulpep.NotificationWindow;
 using MySql.Data.MySqlClient;
 
 namespace PDSA_Game.Games
@@ -34,7 +33,8 @@ namespace PDSA_Game.Games
         public Game02()    
         {
           
-            InitializeComponent();          
+            InitializeComponent();
+            userInput.Enabled = false;
 
         }
    
@@ -172,16 +172,20 @@ namespace PDSA_Game.Games
 
             name = inputName.Text;
 
-            bool isEmpty = name.Length != 0;
+            bool isEmpty = name.Length == 0;
 
             if (isEmpty)
+            {
+                return;
+            }
+            else
             {
                 string S1 = GenerateRandomString(10);
                 string S2 = GenerateRandomString(10);
                 string longestCommonSeq = LongestCommonSequenceRecursive(S1, S2, S1.Length, S2.Length);
                 text1.Text = S1;
                 text2.Text = S2;
-
+                userInput.Enabled = true;
                 UpdateScoreLabel();
                 label1.Text = longestCommonSeq; //demotext
             }
