@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tulpep.NotificationWindow;
+using MySql.Data.MySqlClient;
 
 namespace PDSA_Game.Games
 {
@@ -53,7 +54,7 @@ namespace PDSA_Game.Games
 
             return (lcs1.Length > lcs2.Length) ? lcs1 : lcs2;
         }
-
+        private string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database=pdsagame_db;";
         private void UpdateScoreLabel()
         {
             // Update the score label to display the current score
@@ -66,10 +67,10 @@ namespace PDSA_Game.Games
             String S1 = text1.Text;
             String S2 = text2.Text;
 
-
+            
             string longestCommonSeq = LongestCommonSequenceRecursive(S1, S2, S1.Length, S2.Length);
             String input = userInput.Text;
-
+            MySqlConnection connection = new MySqlConnection(connectionString);
             bool isEmpty = input.Length == 0;
 
             if (isEmpty)
@@ -79,11 +80,34 @@ namespace PDSA_Game.Games
             }
            
             bool isSame = string.Equals(input, longestCommonSeq, StringComparison.OrdinalIgnoreCase);
+            
 
             if (isSame) {
                 score++;
                 MessageBox.Show("Congrats! You Won!", "Congratulations", MessageBoxButtons.OK, MessageBoxIcon.None);
                 UpdateScoreLabel();
+
+                try
+                {
+                    connection.Open();
+                    string insertQuery = "INSERT INTO PlayerResponses (PlayerName, CorrectResponse) VALUES (@name, @longestCommonSeq)";
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@name", name);
+                        command.Parameters.AddWithValue("@longestCommonSeq", longestCommonSeq);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle any exceptions here
+                    Console.WriteLine(ex.ToString());
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
                 RestartForm();
                 
             }
@@ -113,13 +137,17 @@ namespace PDSA_Game.Games
             {
                 RestartForm();
             }
-            text1.Text = S1;
-            text2.Text = S2;
-            label1.Text = longestCommonSeq;
+            else
+            {
+                text1.Text = S1;
+                text2.Text = S2;
+                label1.Text = longestCommonSeq; //demotext
 
 
-            // Clear user input
-            userInput.Text = string.Empty;
+                // Clear user input
+                userInput.Text = string.Empty;
+            }
+            
         }
 
         private void restart_Click(object sender, EventArgs e)
@@ -155,7 +183,7 @@ namespace PDSA_Game.Games
                 text2.Text = S2;
 
                 UpdateScoreLabel();
-                label1.Text = longestCommonSeq;
+                label1.Text = longestCommonSeq; //demotext
             }
             
         }
